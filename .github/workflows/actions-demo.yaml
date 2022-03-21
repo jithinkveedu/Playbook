@@ -9,8 +9,7 @@ jobs:
         actions-demo-build-push:
                 runs-on: ubuntu-latest
                 outputs:
-                        imagename: ${{ steps.step1.outputs.image }}
-                        output2: ${{ steps.step2.outputs.test }}
+                        imagename: ${{ steps.buildandpush.outputs.image }}
                 env:
                         Tag: 0
                         CR_PAT: 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
@@ -35,7 +34,7 @@ jobs:
                                   docker build . -t $REGISTRY/$ACTOR/actionsdemo:${{env.Tag}} 
                                   
                         - name: step1
-                          id: step1
+                          id: buildandpush
                           run: echo "::set-output name=image::$REGISTRY/$ACTOR/actionsdemo:$Tag"                          
 
                         - id: step2
