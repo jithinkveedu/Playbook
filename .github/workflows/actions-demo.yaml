@@ -10,6 +10,7 @@ jobs:
                 runs-on: ubuntu-latest
                 outputs:
                         IMAGE: ${{steps.buildandpush.output.IMAGENAME}}
+                        output2: ${{ steps.step2.outputs.test }}
                 env:
                         Tag: 0
                         CR_PAT: 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
@@ -37,6 +38,9 @@ jobs:
                           id: buildandpush
                           run:  echo "::set-output name=IMAGENAME::hello"                          
 
+                        - id: step2
+                          run: echo "::set-output name=test::world"
+
                         - name: docker login
                           run: echo $TOKEN | docker login ghcr.io -u $ACTOR --password-stdin
 
@@ -58,4 +62,4 @@ jobs:
                         name: Production
                 steps:
                         - name: get name
-                          run: echo ${{needs.actions-demo-build-push.outputs.IMAGE}}
+                          run: echo ${{needs.actions-demo-build-push.outputs.IMAGE}} ${{needs.job1.outputs.output2}}
