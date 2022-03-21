@@ -4,12 +4,12 @@ on: [push]
 permissions:
         packages: write
 
-env:
-        IMAGE: blank
 
 jobs:
         actions-demo-build-push:
                 runs-on: ubuntu-latest
+                outputs:
+                        IMAGE: ${{steps.buildandpush.output.IMAGE}}
                 env:
                         Tag: 0
                         CR_PAT: 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
@@ -29,9 +29,12 @@ jobs:
                                   cd ActionsDemo
                                   docker build . -t actionsdemo:${{steps.tag.outputs.date}}
                         - name: build docker image 2
+                          id: buildandpush
                           run: |
                                   cd ActionsDemo
-                                  docker build . -t $REGISTRY/$ACTOR/actionsdemo:${{env.Tag}}
+                                  docker build . -t $REGISTRY/$ACTOR/actionsdemo:${{env.Tag}} 
+                                  #out image to var
+                                  echo "::set-output name=IMAGE::$REGISTRY/$ACTOR/actionsdemo"
 
                         - name: docker login
                           run: echo $TOKEN | docker login ghcr.io -u $ACTOR --password-stdin
@@ -53,4 +56,4 @@ jobs:
                 runs-on: ubuntu-latest
                 steps:
                         - name: get name
-                          run: echo $IMAGE
+                          run: echo ${{needs.actions-demo-build-push.outputs.IMAGE}}
