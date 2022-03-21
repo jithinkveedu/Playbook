@@ -3,12 +3,21 @@ on: [push]
 jobs:
         actions-demo-jobs:
                 runs-on: ubuntu-latest
+                env:
+                        Tag: 0
                 steps:
                         - uses: actions/checkout@v2
                         - name: generate docker tag
                           id: tag
                           run: echo "::set-output name=date::$(date +'%Y%m%d%M%S')"
+
+                        - name: generate docker tag2
+                          run: echo "Tag=$(date +'%Y%m%d%M%S')" >> $GITHUB_ENV
                         - name: build docker image
                           run: |
                                   cd ActionsDemo
                                   docker build . -t actionsdemo:${{steps.tag.outputs.date}}
+                        - name: build docker image 2
+                          run: |
+                                  cd ActionsDemo
+                                  docker build . -t actionsdemo:${{env.Tag}}
