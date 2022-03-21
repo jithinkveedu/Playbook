@@ -4,8 +4,11 @@ on: [push]
 permissions:
         packages: write
 
+env:
+        IMAGE: blank
+
 jobs:
-        actions-demo-jobs:
+        actions-demo-build-push:
                 runs-on: ubuntu-latest
                 env:
                         Tag: 0
@@ -41,3 +44,13 @@ jobs:
                                   registry: ghcr.io
                                   username: ${{github.actor}}
                                   password: ${{secrets.GITHUB_TOKEN}}
+
+
+                        - name: set name of image outside this job
+                          run: echo "IMAGE=$REGISTER/$ACTOR/actionsdemo:${{env.Tag}}" >> $GITHUB_ENV
+        actions-demo-pull-deploy:
+                needs: actions-demo-build-push
+                runs-on: ubuntu-latest
+                steps:
+                        - name: get name
+                          run: echo $IMAGE
