@@ -29,12 +29,13 @@ jobs:
                                   cd ActionsDemo
                                   docker build . -t actionsdemo:${{steps.tag.outputs.date}}
                         - name: build docker image 2
-                          id: buildandpush
                           run: |
                                   cd ActionsDemo
                                   docker build . -t $REGISTRY/$ACTOR/actionsdemo:${{env.Tag}} 
-                                  #out image to var
-                                  echo "::set-output name=IMAGE::$REGISTRY/$ACTOR/actionsdemo"
+                                  
+                        - name: set out
+                          id: buildandpush
+                          run:  echo "::set-output name=IMAGE::$REGISTRY/$ACTOR/actionsdemo"                          
 
                         - name: docker login
                           run: echo $TOKEN | docker login ghcr.io -u $ACTOR --password-stdin
@@ -49,8 +50,7 @@ jobs:
                                   password: ${{secrets.GITHUB_TOKEN}}
 
 
-                        - name: set name of image outside this job
-                          run: echo "IMAGE=$REGISTER/$ACTOR/actionsdemo:${{env.Tag}}" >> $GITHUB_ENV
+                        
         actions-demo-pull-deploy:
                 needs: actions-demo-build-push
                 runs-on: ubuntu-latest
