@@ -9,7 +9,7 @@ jobs:
         actions-demo-build-push:
                 runs-on: ubuntu-latest
                 outputs:
-                        IMAGE: ${{steps.buildandpush.output.IMAGENAME}}
+                        IMAGE: ${{steps.buildandpush.output.imagename}}
                         output2: ${{ steps.step2.outputs.test }}
                 env:
                         Tag: 0
@@ -36,7 +36,7 @@ jobs:
                                   
                         - name: set out
                           id: buildandpush
-                          run:  echo "::set-output name=IMAGENAME::hello"                          
+                          run: echo "::set-output name=imagename::hello"                          
 
                         - id: step2
                           run: echo "::set-output name=test::world"
