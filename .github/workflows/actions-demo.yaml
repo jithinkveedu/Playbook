@@ -54,6 +54,8 @@ jobs:
         actions-demo-pull-deploy:
                 needs: actions-demo-build-push
                 runs-on: ubuntu-latest
+                environment:
+                        name: Production
                 steps:
                         - name: get name
                           run: echo ${{needs.actions-demo-build-push.outputs.IMAGE}}
