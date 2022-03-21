@@ -26,7 +26,7 @@ jobs:
                         - name: docker login
                           run: |
                                   echo $CR_PAT
-                                  echo $CR_PAT | docker login ghcr.io -u jithinkveedu --password-stdin
+                                  echo $CR_PAT | docker login ghcr.io -u jithin.veedu@capgemini.com --password-stdin
 
                         - name: docker push
                           run: docker push ghcr.io/jithinkveedu/actionsdemo:${{env.Tag}}
