@@ -9,7 +9,7 @@ jobs:
         actions-demo-build-push:
                 runs-on: ubuntu-latest
                 outputs:
-                        imagen: ${{steps.buildandpush.output.imagename}}
+                        output1: ${{steps.buildandpush.output.imagename}}
                         output2: ${{ steps.step2.outputs.test }}
                 env:
                         Tag: 0
@@ -61,4 +61,4 @@ jobs:
                         name: Production
                 steps:
                         - name: get name
-                          run: echo ${{needs.actions-demo-build-push.outputs.imagen}} ${{needs.actions-demo-build-push.outputs.output2}}
+                          run: echo ${{needs.actions-demo-build-push.outputs.output1}} ${{needs.actions-demo-build-push.outputs.output2}}
