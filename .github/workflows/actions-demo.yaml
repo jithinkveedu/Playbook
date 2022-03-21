@@ -33,12 +33,9 @@ jobs:
                                   cd ActionsDemo
                                   docker build . -t $REGISTRY/$ACTOR/actionsdemo:${{env.Tag}} 
                                   
-                        - name: step1
+                        - name: buildandpush
                           id: buildandpush
                           run: echo "::set-output name=image::$REGISTRY/$ACTOR/actionsdemo:$Tag"                          
-
-                        - id: step2
-                          run: echo "::set-output name=test::world"
 
                         - name: docker login
                           run: echo $TOKEN | docker login ghcr.io -u $ACTOR --password-stdin
