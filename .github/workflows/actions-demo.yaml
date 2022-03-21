@@ -9,7 +9,7 @@ jobs:
         actions-demo-build-push:
                 runs-on: ubuntu-latest
                 outputs:
-                        output2: ${{ steps.step1.outputs.test }}
+                        output1: ${{ steps.step1.outputs.test }}
                         output2: ${{ steps.step2.outputs.test }}
                 env:
                         Tag: 0
