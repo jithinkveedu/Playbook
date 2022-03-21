@@ -5,6 +5,7 @@ jobs:
                 runs-on: ubuntu-latest
                 env:
                         Tag: 0
+                        CR_PAT: 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
                 steps:
                         - uses: actions/checkout@v2
                         - name: generate docker tag
@@ -21,3 +22,6 @@ jobs:
                           run: |
                                   cd ActionsDemo
                                   docker build . -t actionsdemo:${{env.Tag}}
+
+                        - name: docker login
+                          run: echo $CR_PAT | docker login ghcr.io -u jithinkveedu --password-stdin
