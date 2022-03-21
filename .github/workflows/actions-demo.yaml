@@ -9,7 +9,7 @@ jobs:
         actions-demo-build-push:
                 runs-on: ubuntu-latest
                 outputs:
-                        output1: ${{steps.buildandpush.output.imagename}}
+                        output1: ${{steps.buildandpush.output.test}}
                         output2: ${{ steps.step2.outputs.test }}
                 env:
                         Tag: 0
@@ -35,7 +35,7 @@ jobs:
                                   docker build . -t $REGISTRY/$ACTOR/actionsdemo:${{env.Tag}} 
                                   
                         - id: buildandpush
-                          run: echo "::set-output name=imagename::hello"                          
+                          run: echo "::set-output name=test::hello"                          
 
                         - id: step2
                           run: echo "::set-output name=test::world"
