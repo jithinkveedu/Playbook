@@ -34,8 +34,7 @@ jobs:
                                   cd ActionsDemo
                                   docker build . -t $REGISTRY/$ACTOR/actionsdemo:${{env.Tag}} 
                                   
-                        - name: set out
-                          id: buildandpush
+                        - id: buildandpush
                           run: echo "::set-output name=imagename::hello"                          
 
                         - id: step2
