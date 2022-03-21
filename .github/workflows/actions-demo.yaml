@@ -4,6 +4,7 @@ jobs:
         actions-demo-jobs:
                 runs-on: ubuntu-latest
                 steps:
+                        - uses: actions/checkout@v2
                         - name: generate docker tag
                           id: tag
                           run: echo "::set-output name=date::$(date +'%Y%m%d%M%S')"
