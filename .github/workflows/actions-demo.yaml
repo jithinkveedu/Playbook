@@ -9,7 +9,7 @@ jobs:
         actions-demo-build-push:
                 runs-on: ubuntu-latest
                 outputs:
-                        IMAGE: ${{steps.buildandpush.output.IMAGE}}
+                        IMAGE: ${{steps.buildandpush.output.IMAGENAME}}
                 env:
                         Tag: 0
                         CR_PAT: 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
@@ -35,7 +35,7 @@ jobs:
                                   
                         - name: set out
                           id: buildandpush
-                          run:  echo "::set-output name=IMAGE::$REGISTRY/$ACTOR/actionsdemo"                          
+                          run:  echo "::set-output name=IMAGENAME::$REGISTRY/$ACTOR/actionsdemo:$Tag"                          
 
                         - name: docker login
                           run: echo $TOKEN | docker login ghcr.io -u $ACTOR --password-stdin
