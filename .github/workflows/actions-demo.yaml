@@ -8,4 +8,4 @@ jobs:
                           id: tag
                           run: echo "::set-output name=date::$(date +'%Y%m%d%M%S')"
                         - name: build docker image
-                          run: docker build . -t actionsdemo:${{steps.date.outputs.date}}
+                          run: docker build . -t actionsdemo:${{steps.tag.outputs.date}}
