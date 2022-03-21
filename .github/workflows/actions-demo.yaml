@@ -9,7 +9,7 @@ jobs:
         actions-demo-build-push:
                 runs-on: ubuntu-latest
                 outputs:
-                        output1: ${{ steps.step1.outputs.test }}
+                        output1: ${{ steps.step1.outputs.image }}
                         output2: ${{ steps.step2.outputs.test }}
                 env:
                         Tag: 0
@@ -36,7 +36,7 @@ jobs:
                                   
                         - name: step1
                           id: step1
-                          run: echo "::set-output name=test::hello"                          
+                          run: echo "::set-output name=image::hello"                          
 
                         - id: step2
                           run: echo "::set-output name=test::world"
