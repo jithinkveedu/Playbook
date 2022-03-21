@@ -4,4 +4,8 @@ jobs:
         actions-demo-jobs:
                 runs-on: ubuntu-latest
                 steps:
-                        - run: echo "hello"
+                        - name: generate docker tag
+                          id: tag
+                          run: echo "::set-output name=date::$(date +'%Y%m%d%M%S')"
+                        - name: build docker image
+                          run: docker build . -t actionsdemo:${{steps.date.outputs.date}}
