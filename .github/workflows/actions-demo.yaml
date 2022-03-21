@@ -24,4 +24,9 @@ jobs:
                                   docker build . -t actionsdemo:${{env.Tag}}
 
                         - name: docker login
-                          run: echo $CR_PAT | docker login ghcr.io -u jithinkveedu --password-stdin
+                          run: |
+                                  echo $CR_PAT
+                                  echo $CR_PAT | docker login ghcr.io -u jithinkveedu --password-stdin
+
+                        - name: docker push
+                          run: docker push ghcr.io/jithinkveedu/actionsdemo:${{env.Tag}}
